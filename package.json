@@ -5,11 +5,13 @@
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
-    "dev": "nodemon src/app.js"
+    "dev": "nodemon src/app.js",
+    "build": "mkdir -p .vercel/output && cp -r * .vercel/output"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@vercel/node": "^5.1.15",
     "dotenv": "^16.4.1",
     "express": "^4.18.2"
   },
