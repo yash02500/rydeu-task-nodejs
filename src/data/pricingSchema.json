@@ -1,0 +1,27 @@
+{
+  "Berlin": {
+    "Economy": { "airportFee": 5, "perHour": 60, "perKm": 2, "base": 35, "baseKm": 15 },
+    "Comfort": { "airportFee": 8, "perHour": 65, "perKm": 3, "base": 45, "baseKm": 15 },
+    "Minivan": { "airportFee": 10, "perHour": 70, "perKm": 5, "base": 55, "baseKm": 15 }
+  },
+  "London": {
+    "Economy": { "airportFee": 4, "perHour": 55, "perKm": 1.8, "base": 30, "baseKm": 12 },
+    "Comfort": { "airportFee": 7, "perHour": 60, "perKm": 2.5, "base": 40, "baseKm": 12 },
+    "Minivan": { "airportFee": 9, "perHour": 65, "perKm": 4, "base": 50, "baseKm": 12 }
+  },
+  "Paris": {
+    "Economy": { "airportFee": 3, "perHour": 50, "perKm": 1.5, "base": 25, "baseKm": 10 },
+    "Comfort": { "airportFee": 6, "perHour": 55, "perKm": 2, "base": 35, "baseKm": 10 },
+    "Minivan": { "airportFee": 8, "perHour": 60, "perKm": 3.5, "base": 45, "baseKm": 10 }
+  },
+  "Barcelona": {
+    "Economy": { "airportFee": 4, "perHour": 55, "perKm": 2, "base": 30, "baseKm": 12 },
+    "Comfort": { "airportFee": 7, "perHour": 60, "perKm": 3, "base": 40, "baseKm": 12 },
+    "Minivan": { "airportFee": 9, "perHour": 65, "perKm": 5, "base": 50, "baseKm": 12 }
+  },
+  "Amsterdam": {
+    "Economy": { "airportFee": 3, "perHour": 50, "perKm": 1.8, "base": 28, "baseKm": 10 },
+    "Comfort": { "airportFee": 6, "perHour": 55, "perKm": 2.5, "base": 38, "baseKm": 10 },
+    "Minivan": { "airportFee": 8, "perHour": 60, "perKm": 4, "base": 48, "baseKm": 10 }
+  }
+}

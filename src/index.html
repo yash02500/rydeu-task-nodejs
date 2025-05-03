@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rydeu Email Requirement API Documentation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 2rem;
+        }
+        h3 {
+            color: #34495e;
+        }
+        code, pre {
+            background-color: #ecf0f1;
+            padding: 0.5rem;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre {
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .endpoint {
+            background-color: #e8f4ff;
+            padding: 1rem;
+            border-left: 5px solid #3498db;
+            margin: 1rem 0;
+        }
+        ul {
+            padding-left: 1.5rem;
+        }
+        .example {
+            background-color: #f9f9f9;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚗 Rydeu Email Requirement API</h1>
+            <p class="lead">Determine if a customer needs to provide their email to check ride pricing between addresses</p>
+        </header>
+
+        <section>
+            <h2>📍 Endpoint</h2>
+            <div class="endpoint">
+                <strong>POST</strong> /api/check-email-required
+            </div>
+        </section>
+
+        <section>
+            <h2>🧑‍💻 Testing with Postman</h2>
+            <ol>
+                <li>Open Postman and create a new POST request</li>
+                <li>Set URL to <code>http://localhost:3000/api/check-email-required</code></li>
+                <li>Go to Body tab > Select <strong>raw</strong> > Choose JSON</li>
+                <li>Enter request body (see examples below)</li>
+                <li>Click Send to get response</li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>📝 Request Body Format</h2>
+            <pre><code>{
+  "pickupAddress": "Your pickup address",
+  "destinationAddress": "Your destination address",
+  "city": "City name",
+  "vehicleType": "Economy" // (optional, defaults to Economy)
+}</code></pre>
+        </section>
+
+        <section>
+            <h2>🏷️ Example Addresses</h2>
+            
+            <h3>City: London</h3>
+            <ul>
+                <li>"pickupAddress": "London"</li>
+                <li>"destinationAddress": "Heathrow Airport"</li>
+                <li>"destinationAddress": "Gatwick Airport"</li>
+                <li>"destinationAddress": "Stansted Airport"</li>
+            </ul>
+
+            <h3>City: Paris</h3>
+            <ul>
+                <li>"pickupAddress": "Paris"</li>
+                <li>"destinationAddress": "Charles de Gaulle Airport"</li>
+                <li>"destinationAddress": "Orly Airport"</li>
+            </ul>
+
+            <h3>City: Berlin</h3>
+            <ul>
+                <li>"pickupAddress": "Berlin"</li>
+                <li>"destinationAddress": "Tegel Airport"</li>
+                <li>"destinationAddress": "Schönefeld Airport"</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>💡 Sample Requests</h2>
+            
+            <div class="example">
+                <h3>Example 1: London to Heathrow Airport</h3>
+                <pre><code>{
+  "pickupAddress": "London",
+  "destinationAddress": "Heathrow Airport",
+  "city": "London",
+  "vehicleType": "Economy"
+}</code></pre>
+            </div>
+
+            <div class="example">
+                <h3>Example 2: Paris to Orly Airport</h3>
+                <pre><code>{
+  "pickupAddress": "Paris",
+  "destinationAddress": "Orly Airport",
+  "city": "Paris"
+}</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h2>⚠️ Error Handling</h2>
+            
+            <h3>1. Missing Required Fields</h3>
+            <pre><code>{"error": "Missing required fields: pickupAddress, destinationAddress, city"}</code></pre>
+            
+            <h3>2. Distance Too Far</h3>
+            <pre><code>{"error": "Too far to offer ride"}</code></pre>
+            
+            <h3>3. Invalid City or Vehicle Type</h3>
+            <pre><code>{"error": "Invalid city or vehicle type"}</code></pre>
+        </section>
+
+        <section>
+            <h2>📧 Email Requirement Logic</h2>
+            <p>Email is required if <strong>any</strong> of these conditions are met:</p>
+            <ul>
+                <li>Distance > 30 km</li>
+                <li>Price < €50</li>
+                <li>City is not London or Paris</li>
+            </ul>
+            
+            <p>Email is <strong>not</strong> required if <strong>all</strong> these conditions are met:</p>
+            <ul>
+                <li>Distance ≤ 30 km</li>
+                <li>Price ≥ €50</li>
+                <li>City is London or Paris</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>🧮 Price Calculation</h2>
+            <p>Price depends on:</p>
+            <ul>
+                <li>City</li>
+                <li>Vehicle type</li>
+                <li>Distance</li>
+                <li>Airport surcharge (if applicable)</li>
+            </ul>
+            
+            <p>Includes base fare + per-km rate + airport fee if destination contains "airport"</p>
+        </section>
+
+        <section>
+            <h2>🛠️ Edge Cases</h2>
+            <ul>
+                <li>Unlisted addresses: Random distance between 5-50 km</li>
+                <li>Invalid city/vehicle type: Returns error</li>
+                <li>Distance > 1000 km: Returns "Too far" error</li>
+            </ul>
+        </section>
+    </div>
+</body>
+</html>
