@@ -5,8 +5,7 @@
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
-    "dev": "nodemon src/app.js",
-    "build": "mkdir -p .vercel/output && cp -r * .vercel/output"
+    "dev": "nodemon src/app.js"
   },
   "author": "",
   "license": "ISC",
